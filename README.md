@@ -63,7 +63,23 @@ To **run**, open notebooks in Jupyter or VS Code and execute cells sequentially
 
 ---
 
-### 4. Glare Detection/Removal
+### 4. Blure removal
+
+**Main Fucntion**  
+
+`motionBlur.ipynb`
+- Perform Blind RL deconvolution with a 128×128 pixel grid.
+- Remove motion blur and out-of-focus blur.
+- Suppress the introduced ring artifacts using total variation smoothing.
+
+**Evaluation** (`evaluation/evaluation.ipynb`):
+- Calculate the Tenengrad, Laplacian variance, and frequency-domain metrics.
+- Calculate the improvement for individual subjects.
+
+To **run**, open the notebook and execute cells with your input image.
+---
+
+### 5. Glare Detection/Removal
 
 `glare.ipynb`
 - Applies classical BM3D denoising to reduce assumed Gaussian noise
@@ -74,7 +90,7 @@ To **run**, open the notebook and execute cells with your input image.
 
 ---
 
-### 5. Denoise
+### 6. Denoise
 
 `denoise.ipynb`
 - Detects glare in images using HSV thresholding
@@ -85,7 +101,7 @@ To **run**, open the notebook and execute cells with your input image.
 
 ---
 
-### 6. Zero-DCE
+### 7. Zero-DCE
 
 Here is the [link](https://github.com/Li-Chongyi/Zero-DCE) for the actual repository. The one here has some minor changes and added files for our usage.
 
@@ -95,7 +111,7 @@ Here is the [link](https://github.com/Li-Chongyi/Zero-DCE) for the actual reposi
 - just a subset of images, primarily the ones that looked dark and worse lighting conditions
 ---
 
-### 7. Daphnia Dataset
+### 8. Daphnia Dataset
 
 `Daphnia_Counter1-5/`
 
