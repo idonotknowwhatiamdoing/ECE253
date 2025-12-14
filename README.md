@@ -2,6 +2,19 @@
 
 Scripting and automating image processing techniques on photos of Daphnia (D. magna).
 
+## Installation & Setup
+
+### Clone Repository with Submodules
+
+```bash
+git clone --recurse-submodules <repository-url>
+cd ECE253
+```
+
+### Dataset
+
+Download the dataset from this [Google Drive link](https://drive.google.com/file/d/16f5vKlTksrY68vdscSIL6Uj8a39R3CHN/view?usp=sharing) (please sign in with UCSD credentials) and unzip it into the repository root. The dataset contains pre-converted PNG images ready for processing.
+
 ## Requirements
 
 Install required Python packages:
@@ -11,23 +24,9 @@ pip install opencv-python numpy matplotlib pandas rawpy imageio scikit-image
 
 ## Usage
 
-### 1. Image Format Conversion (ORF -> PNG)
+### 1. Low-Light Enhancement
 
-Convert Olympus ORF raw files to PNG format:
-
-```bash
-# Single file
-python util/orf2png.py <file.orf> [output_dir]
-
-# Batch convert directory
-python util/orf2png.py <directory> [output_dir]
-```
-
-**Output**: PNG files in `converted_png/` (or specified directory)
-
----
-
-### 2. Low-Light Enhancement
+#### CLAHE Method
 
 Apply histogram equalization and CLAHE to improve low-light images:
 
@@ -45,41 +44,25 @@ python lowlight/lowlight.py <directory>
 - `*_clahe.png` - CLAHE enhanced
 - `*_comparison.png` - Side-by-side comparison
 
+#### Zero-DCE Method
+
+Apply Zero-DCE deep learning-based enhancement for low-light images:
+
+1. **Copy dataset to Zero-DCE test directory**:
+```bash
+copy <processed_images> lowlight/Zero-DCE/Zero-DCE_code/data/test_data/
+```
+
+2. **Run Zero-DCE test**:
+```bash
+python lowlight/Zero-DCE/Zero-DCE_code/lowlight_test.py
+```
+
+**Output**: Enhanced images in `lowlight/Zero-DCE/Zero-DCE_code/data/result/dark/`
+
 ---
 
-### 3. Analysis & Evaluation
-
-**Lowlight Analysis** (`lowlight/analysis.ipynb`):
-- Compares CLAHE vs Zero-DCE enhancement methods
-- Calculates median intensity and CDF metrics
-- Generates quantitative comparisons
-
-**Evaluation** (`evaluation/evaluation.ipynb`):
-- Calculates image quality metrics (mean, std, contrast, dynamic range)
-- Generates histogram comparisons
-- Creates difference maps between original and enhanced images
-
-To **run**, open notebooks in Jupyter or VS Code and execute cells sequentially
-
----
-
-### 4. Blure removal
-
-**Main Fucntion**  
-
-`motionBlur.ipynb`
-- Perform Blind RL deconvolution with a 128×128 pixel grid.
-- Remove motion blur and out-of-focus blur.
-- Suppress the introduced ring artifacts using total variation smoothing.
-
-**Evaluation** (`evaluation/evaluation.ipynb`):
-- Calculate the Tenengrad, Laplacian variance, and frequency-domain metrics.
-- Calculate the improvement for individual subjects.
-
-To **run**, open the notebook and execute cells with your input image.
----
-
-### 5. Glare Detection/Removal
+### 2. Glare Detection/Removal
 
 `glare.ipynb`
 - Applies classical BM3D denoising to reduce assumed Gaussian noise
@@ -90,7 +73,7 @@ To **run**, open the notebook and execute cells with your input image.
 
 ---
 
-### 6. Denoise
+### 3. Denoise
 
 `denoise.ipynb`
 - Detects glare in images using HSV thresholding
@@ -101,17 +84,35 @@ To **run**, open the notebook and execute cells with your input image.
 
 ---
 
-### 7. Zero-DCE
+### 4. Blur Removal
 
-Here is the [link](https://github.com/Li-Chongyi/Zero-DCE) for the actual repository. The one here has some minor changes and added files for our usage.
+`motionBlur.ipynb`
+- Perform Blind RL deconvolution with a 128×128 pixel grid
+- Remove motion blur and out-of-focus blur
+- Suppress introduced ring artifacts using total variation smoothing
+- Calculate improvement using Tenengrad, Laplacian variance, and frequency-domain metrics
 
-`lowlight/Zero-DCE-master/`
+To **run**, open the notebook and execute cells with your input image.
 
-**Output**: Processed images in `lowlight\Zero-DCE-master\Zero-DCE_code\data\result\dark`
-- just a subset of images, primarily the ones that looked dark and worse lighting conditions
 ---
 
-### 8. Daphnia Dataset
+### 5. Analysis & Evaluation
+
+**Lowlight Analysis** (`lowlight/analysis.ipynb`):
+- Computes and compares cumulative distribution functions (CDF) of pixel intensities
+- Analyzes dataset-average CDFs for original, CLAHE, and Zero-DCE enhanced images
+- Generates overlay plot to visualize differences in pixel intensity distributions
+
+**Evaluation** (`evaluation/evaluation.ipynb`):
+- Calculates image quality metrics (mean, std, contrast, dynamic range)
+- Generates histogram comparisons
+- Creates difference maps between original and enhanced images
+
+To **run**, open notebooks in Jupyter or VS Code and execute cells sequentially
+
+---
+
+### 6. Daphnia Dataset
 
 `Daphnia_Counter1-5/`
 
@@ -124,9 +125,10 @@ Roboflow-exported dataset in COCO format with:
 
 ## Workflow Example
 
-Typical processing pipeline:
+Complete processing pipeline for low-light enhancement:
 
-1. Convert raw camera files: `python util/orf2png.py original/`
-2. Enhance low-light images: `python lowlight/lowlight.py converted_png/`
-3. Analyze results using `lowlight/analysis.ipynb`
-4. Evaluate quality using `evaluation/evaluation.ipynb`
+1. Download and unzip dataset from [Google Drive link](https://drive.google.com/file/d/16f5vKlTksrY68vdscSIL6Uj8a39R3CHN/view?usp=sharing) into the repository root (please sign in with UCSD credentials)
+2. Run CLAHE enhancement: `python lowlight/lowlight.py <dataset_directory>`
+3. Copy processed images to Zero-DCE: `copy lowlight/output/* lowlight/Zero-DCE/Zero-DCE_code/data/test_data/`
+4. Run Zero-DCE enhancement: `python lowlight/Zero-DCE/Zero-DCE_code/lowlight_test.py`
+5. Analyze and compare results using `lowlight/analysis.ipynb` and `evaluation/evaluation.ipynb`
