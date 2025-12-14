@@ -63,6 +63,21 @@ To **run**, open notebooks in Jupyter or VS Code and execute cells sequentially
 
 ---
 
+### 4. Blure removal
+
+**Main Fucntion**  
+
+`motionBlur.ipynb`
+- Profrom BlineRL deconvlution with 128*128 pixal grid
+- Remove motion blure and out of focuse blure
+- Supress the introduced ring artifact with total varient smoothing
+
+To **run**, open the notebook and execute cells with your input image.
+
+**Evaluation** (`evaluation/evaluation.ipynb`):
+
+---
+
 ### 4. Glare Detection/Removal
 
 `glare.ipynb`
