@@ -81,6 +81,17 @@ To **run**, open the notebook and execute cells with your input image.
 ### 4. Glare Detection/Removal
 
 `glare.ipynb`
+- Applies classical BM3D denoising to reduce assumed Gaussian noise
+- Evaluates a hybrid BM3D + DnCNN residual denoiser
+- Compares denoising performance using PSNR, high-frequency energy, and qualitative inspection
+
+To **run**, open the notebook and execute cells with your input image.
+
+---
+
+### 5. Denoise
+
+`denoise.ipynb`
 - Detects glare in images using HSV thresholding
 - Removes glare using inpainting techniques
 - Applies Multi-Scale Retinex (MSR) for additional enhancement
@@ -89,7 +100,7 @@ To **run**, open the notebook and execute cells with your input image.
 
 ---
 
-### 5. Zero-DCE
+### 6. Zero-DCE
 
 Here is the [link](https://github.com/Li-Chongyi/Zero-DCE) for the actual repository. The one here has some minor changes and added files for our usage.
 
@@ -99,7 +110,7 @@ Here is the [link](https://github.com/Li-Chongyi/Zero-DCE) for the actual reposi
 - just a subset of images, primarily the ones that looked dark and worse lighting conditions
 ---
 
-### 6. Daphnia Dataset
+### 7. Daphnia Dataset
 
 `Daphnia_Counter1-5/`
 

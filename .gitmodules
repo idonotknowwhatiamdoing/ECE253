@@ -1,0 +1,3 @@
+[submodule "lowlight/Zero-DCE"]
+	path = lowlight/Zero-DCE
+	url = git@github.com:Li-Chongyi/Zero-DCE.git
