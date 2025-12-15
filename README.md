@@ -90,11 +90,16 @@ To **run**, open the notebook and execute cells with your input image.
 
 ### 4. Blur Removal
 
+**Main Function**  
+
 `motionBlur.ipynb`
-- Perform Blind RL deconvolution with a 128×128 pixel grid
-- Remove motion blur and out-of-focus blur
-- Suppress introduced ring artifacts using total variation smoothing
-- Calculate improvement using Tenengrad, Laplacian variance, and frequency-domain metrics
+- Perform Blind RL deconvolution with a 128×128 pixel grid.
+- Remove motion blur and out-of-focus blur.
+- Suppress the introduced ring artifacts using total variation smoothing.  
+
+**Evaluation** (`evaluation/evaluation.ipynb`):
+- Calculate the Tenengrad, Laplacian variance, and frequency-domain metrics.
+- Calculate the improvement for individual subjects.
 
 To **run**, open the notebook and execute cells with your input image.
 
