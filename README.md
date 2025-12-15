@@ -44,6 +44,8 @@ python lowlight/lowlight.py <directory>
 - `*_clahe.png` - CLAHE enhanced
 - `*_comparison.png` - Side-by-side comparison
 
+Corresponding analysis is hard coded to look for `ECE253/lowlight/output` (i.e., `output` exists in `lowlight` subdirectory). You can either change this path in the `.ipynb` or use the same expected path structure.
+
 #### Zero-DCE Method
 
 Apply Zero-DCE deep learning-based enhancement for low-light images:
@@ -57,6 +59,8 @@ copy <processed_images> lowlight/Zero-DCE/Zero-DCE_code/data/test_data/
 ```bash
 python lowlight/Zero-DCE/Zero-DCE_code/lowlight_test.py
 ```
+
+Corresponding analysis is hard coded to look for `ECE253/lowlight/Zero-DCE/Zero-DCE_code/data/result/dark` (i.e., `dark` is the directory to name the PNG files). You can either change this path in the `.ipynb` or use the same expected path structure.
 
 **Output**: Enhanced images in `lowlight/Zero-DCE/Zero-DCE_code/data/result/dark/`
 
